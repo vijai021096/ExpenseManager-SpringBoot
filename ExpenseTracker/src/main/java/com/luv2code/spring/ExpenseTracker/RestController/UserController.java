@@ -72,4 +72,9 @@ public class UserController {
 		theModel.addAttribute("ExpensesByUserAndCategory", expenses);
 		return "list-expenses-userCategory";
 	}
+	
+	@GetMapping("/home")
+	public String showHomePage() {
+		return "home";
+	}
 }
