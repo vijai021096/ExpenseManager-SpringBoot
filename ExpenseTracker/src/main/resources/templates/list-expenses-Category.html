@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Expenses Directory</title>
+</head>
+
+<body>
+
+	<h3>Expenses Directory</h3>
+	<hr>
+	
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Expense Amount</th>
+				
+				<th>Expense Date</th>
+				
+				<th>Expense Notes<th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempExpense :${ExpensesByCategory}">
+			
+				<td th:text="${tempExpense.amount}" />	
+				<td th:text="${tempExpense.expenseDate}" />	
+				<td th:text="${tempExpense.expenseNotes}" />	
+				
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+	
+</body>
+</html>
+
+
+
