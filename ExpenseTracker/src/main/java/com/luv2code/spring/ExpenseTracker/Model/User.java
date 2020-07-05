@@ -20,16 +20,27 @@ public class User {
 	@Column(name = "name")
 	private String userName;
 	
+	@Column(name="emailId")
+	private String emailId;
+
+	@Column(name="password")
+    private String password;
+    
+	@Column(name="isEnabled")
+    private boolean isEnabled;
+    
 	public User() {
 		
 	}
-	
-	public User(int id, String userName) {
+
+	public User(int id, String userName, String emailId, String password, boolean isEnabled) {
 		super();
 		this.id = id;
 		this.userName = userName;
+		this.emailId = emailId;
+		this.password = password;
+		this.isEnabled = isEnabled;
 	}
-
 
 
 	public int getId() {
@@ -47,11 +58,48 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+	
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + "]";
+		return "User [id=" + id + ", userName=" + userName + ", emailId=" + emailId + ", password=" + password
+				+ ", isEnabled=" + isEnabled + "]";
 	}
+
+
+
+
+
 	
 	
 }

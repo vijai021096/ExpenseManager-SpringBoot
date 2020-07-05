@@ -2,13 +2,18 @@ package com.luv2code.spring.ExpenseTracker.Service;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import com.luv2code.spring.ExpenseTracker.Model.Category;
+import com.luv2code.spring.ExpenseTracker.Model.ConfirmationToken;
 import com.luv2code.spring.ExpenseTracker.Model.Expense;
 import com.luv2code.spring.ExpenseTracker.Model.User;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 	
 	public List<User> findAll();
+	
+	public User findById(int id);
 	
 	public List<Category>findAllCategory();
 
@@ -19,4 +24,14 @@ public interface UserService {
 	public List<Expense> findByCategoryId(int id);
 	
 	public List<Expense> findByUserAndCategory(int categoryId,int userId);
+	
+	public List<User> findByEmailIdIgnoreCase(String emailId);
+	
+	public void save(User user);
+	
+	public void saveConfirmation(ConfirmationToken confirmationToken);
+	
+	public ConfirmationToken findByConfirmationToken(String confirmationToken);
+
+	public List<User> findByUserName(String userName);
 }

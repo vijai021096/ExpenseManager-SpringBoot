@@ -1,33 +1,34 @@
 package com.luv2code.spring.ExpenseTracker.RestController;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.luv2code.spring.ExpenseTracker.Model.Category;
+
 import com.luv2code.spring.ExpenseTracker.Model.Expense;
 import com.luv2code.spring.ExpenseTracker.Model.User;
+
 import com.luv2code.spring.ExpenseTracker.Service.UserService;
 
 @Controller
-@RequestMapping("/api")
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 	
-
 	public UserController(UserService userService) {
-		userService=this.userService;
+	  this.userService=userService;
 	}
-	
+    
 	@GetMapping("/users")
 	public String findAllUsers(Model theModel) {
 		
@@ -77,4 +78,19 @@ public class UserController {
 	public String showHomePage() {
 		return "home";
 	}
+	
+@GetMapping("/userName")
+public String showUsersByName(Model model,@RequestParam("userName")String userName) {
+	List<User> user=userService.findByUserName(userName);
+	model.addAttribute("userName", user);
+	return "user-by-username";
+}
+	
+	@GetMapping("/redirect")
+	public String redirectToLogin() {
+		return "redirect:register";
+	}
+	
+	
+	 
 }
