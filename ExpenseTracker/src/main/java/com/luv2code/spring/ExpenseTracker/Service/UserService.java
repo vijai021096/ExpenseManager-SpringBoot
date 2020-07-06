@@ -21,11 +21,11 @@ public interface UserService extends UserDetailsService {
 	
 	public List<Expense>findByUserId(int id);
 	
-	public List<Expense> findByCategoryId(int id);
-	
-	public List<Expense> findByUserAndCategory(int categoryId,int userId);
+	public List<Expense>findByCategoryId(int id);
 	
 	public List<User> findByEmailIdIgnoreCase(String emailId);
+	
+	public void saveExpense(Expense expense);
 	
 	public void save(User user);
 	

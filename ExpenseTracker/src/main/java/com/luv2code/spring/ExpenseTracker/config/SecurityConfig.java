@@ -44,16 +44,21 @@ import com.luv2code.spring.ExpenseTracker.Service.UserService;
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/confirm**").permitAll()
-                .and()
-    			.formLogin()
+            .antMatchers("/register").permitAll()
+            .antMatchers("/confirm").permitAll()
+            .anyRequest()
+            .authenticated()
+            .and()
+            .formLogin()
     				.loginPage("/showMyLoginPage")
+    				.permitAll()
     				.loginProcessingUrl("/authenticateTheUser")
     				.successHandler(customAuthenticationSuccessHandler)
-    				.permitAll()
     			.and()
-    			.logout().permitAll()
+    			.logout()
+    			.logoutUrl("/perform_logout")
+    			.invalidateHttpSession(true)
+    			.deleteCookies("JSESSIONID")
     			.and()
     			.exceptionHandling().accessDeniedPage("/access-denied");
             

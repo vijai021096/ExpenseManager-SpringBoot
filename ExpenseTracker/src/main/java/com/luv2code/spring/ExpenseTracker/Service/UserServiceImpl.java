@@ -61,20 +61,10 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	public List<Expense> findByUserId(int id) {
 		
-		return expenseRepository.findByUserExpenseId(id);
+		return expenseRepository.findByUserId(id);
 	}
-	@Override
-	@Transactional
-	public List<Expense> findByCategoryId(int id) {
-		
-		return expenseRepository.findByExpenseCategoryId(id);
-	}
-	@Override
-	@Transactional
-	public List<Expense> findByUserAndCategory(int categoryId, int userId) {
-		
-		return expenseRepository.findByExpenseCategoryIdAndUserExpenseId(categoryId, userId);
-	}
+	
+
 	@Override
 	@Transactional
 	public List<User> findByEmailIdIgnoreCase(String emailId) {
@@ -122,8 +112,18 @@ public class UserServiceImpl implements UserService{
 	}
 	@Override
 	public User findById(int id) {
-		// TODO Auto-generated method stub
+		
 		return userRepository.findById(id);
+	}
+	@Override
+	public void saveExpense(Expense expense) {
+		
+	   expenseRepository.save(expense);
+		
+	}
+	@Override
+	public List<Expense> findByCategoryId(int id) {
+		return expenseRepository.findByCategoryCategoryId(id);
 	}
 
 }

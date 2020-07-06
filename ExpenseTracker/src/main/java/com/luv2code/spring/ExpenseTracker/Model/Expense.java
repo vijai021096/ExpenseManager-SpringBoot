@@ -1,13 +1,24 @@
 package com.luv2code.spring.ExpenseTracker.Model;
 
+
+
+
+
+
 import java.sql.Date;
+import java.util.Calendar;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,13 +29,7 @@ public class Expense {
 	@Column(name="expense_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int expenseId;
-	
-	@Column(name = "user_expense_id")
-	private int userExpenseId;
-	
-	@Column(name="expense_category_id")
-	private int expenseCategoryId;
-	
+		
 	@Column(name ="expense_amount")
 	private int amount;
 	
@@ -37,17 +42,38 @@ public class Expense {
 	@Column(name="expense_notes")
 	private String expenseNotes;
 
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+	private User user;
 
-	public Expense(int expenseId, int userExpenseId, int expenseCategoryId, int amount, Date expenseDate,
-			Date expenseAddedDate, String expenseNotes) {
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="expense_categroy_id")
+	private Category category;
+	
+
+
+
+	
+	
+	public Expense(int expenseId, int amount, Date expenseDate, Date expenseAddedDate, String expenseNotes, User user,
+			Category category) {
 		super();
 		this.expenseId = expenseId;
-		this.userExpenseId = userExpenseId;
-		this.expenseCategoryId = expenseCategoryId;
 		this.amount = amount;
 		this.expenseDate = expenseDate;
-		this.expenseAddedDate = expenseAddedDate;
+		this.expenseAddedDate =expenseAddedDate;
 		this.expenseNotes = expenseNotes;
+		this.user = user;
+		this.category = category;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public Expense() {
@@ -62,21 +88,7 @@ public class Expense {
 		this.expenseId = expenseId;
 	}
 
-	public int getUserExpenseId() {
-		return userExpenseId;
-	}
-
-	public void setUserExpenseId(int userExpenseId) {
-		this.userExpenseId = userExpenseId;
-	}
-
-	public int getExpenseCategoryId() {
-		return expenseCategoryId;
-	}
-
-	public void setExpenseCategoryId(int expenseCategoryId) {
-		this.expenseCategoryId = expenseCategoryId;
-	}
+	
 
 	public int getAmount() {
 		return amount;
@@ -99,7 +111,7 @@ public class Expense {
 	}
 
 	public void setExpenseAddedDate(Date expenseAddedDate) {
-		this.expenseAddedDate = expenseAddedDate;
+		this.expenseAddedDate =  expenseAddedDate;
 	}
 
 	public String getExpenseNotes() {
@@ -110,10 +122,19 @@ public class Expense {
 		this.expenseNotes = expenseNotes;
 	}
 
+    
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
 	@Override
 	public String toString() {
-		return "Expense [expenseId=" + expenseId + ", userExpenseId=" + userExpenseId + ", expenseCategoryId="
-				+ expenseCategoryId + ", amount=" + amount + ", expenseDate=" + expenseDate + ", expenseAddedDate="
+		return "Expense [expenseId=" + expenseId + ", amount=" + amount + ", expenseDate=" + expenseDate + ", expenseAddedDate="
 				+ expenseAddedDate + ", expenseNotes=" + expenseNotes + "]";
 	}
 	

@@ -1,38 +1,61 @@
+ 
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    
 
 <head>
-	<title>Expenses Directory</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Expenses</title>
 </head>
 
 <body>
 
-	<h3>Expenses Directory</h3>
+<div class="container">
+
+	<h3>Expenses</h3>
 	<hr>
 	
-	<table border="1">
-		<thead>
+	<!-- Add a button -->
+	<a th:href="@{/showFormForAdd}"
+		class="btn btn-primary btn-sm mb-3">
+		Add Expense
+	</a>
+	
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
 			<tr>
-				<th>Expense Amount</th>
-				
+				<th>Category</th>
+				<th>Amount</th>
 				<th>Expense Date</th>
+				<th>Notes</th>
+				<th>Expense Added Date</th>
 				
-				<th>Expense Notes<th>
+				
 			</tr>
 		</thead>
 		
 		<tbody>
-			<tr th:each="tempExpense :${Expenses}">
+			<tr th:each="tempExpense : ${Expenses}">
 			
+				<td th:text="${tempExpense.category.categoryName}" />
 				<td th:text="${tempExpense.amount}" />	
 				<td th:text="${tempExpense.expenseDate}" />	
-				<td th:text="${tempExpense.expenseNotes}" />	
-				
-				
+				<td th:text="${tempExpense.expenseNotes}" />
+				<td th:text="${tempExpense.expenseAddedDate}" />
+			
+								
 			</tr>
 		</tbody>		
 	</table>
-	
+<a th:href="@{/showMyLoginPage}">Logout</a>
+</div>
 	
 </body>
 </html>
