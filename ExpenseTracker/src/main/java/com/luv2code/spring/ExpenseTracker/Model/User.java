@@ -35,7 +35,7 @@ public class User {
 	@Column(name="isEnabled")
     private boolean isEnabled;
     
-	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user",cascade = CascadeType.PERSIST)
 	
 	private List<Expense> expenseList ;
 	

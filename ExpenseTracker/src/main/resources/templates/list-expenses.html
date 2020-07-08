@@ -10,24 +10,38 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<title>Expenses</title>
 </head>
 
 <body>
+<br>
+<br>
+<div class="container">
+	
+</div>
 
 <div class="container">
 
 	<h3>Expenses</h3>
 	<hr>
+	<br>
+	<br>
 	
 	<!-- Add a button -->
-	<a th:href="@{/showFormForAdd}"
-		class="btn btn-primary btn-sm mb-3">
+	<a th:href="@{/showFormForAddIncome}" class="btn btn-primary">Add Income</a>     <a th:href="@{/showFormForAdd}"
+		class="btn btn-primary ">
 		Add Expense
 	</a>
-	
-	
+ <br>
+ <br>
+	<br>
+
+	<div class="container-fluid">
 	<table class="table table-bordered table-striped">
 		<thead class="thead-dark">
 			<tr>
@@ -36,25 +50,33 @@
 				<th>Expense Date</th>
 				<th>Notes</th>
 				<th>Expense Added Date</th>
-				
+				<th>Actions</th>
 				
 			</tr>
 		</thead>
-		
+	
 		<tbody>
 			<tr th:each="tempExpense : ${Expenses}">
 			
 				<td th:text="${tempExpense.category.categoryName}" />
-				<td th:text="${tempExpense.amount}" />	
+				<td th:text="${tempExpense.amount}"/>
 				<td th:text="${tempExpense.expenseDate}" />	
 				<td th:text="${tempExpense.expenseNotes}" />
 				<td th:text="${tempExpense.expenseAddedDate}" />
-			
+				
+			    <td> <a th:href="@{/showFormForUpdate/{expenseId}(expenseId=${tempExpense.expenseId})}" class="btn btn-primary">
+                                        Update</a> <a th:href="@{/delete/{expenseId}(expenseId=${tempExpense.expenseId})}"class="btn btn-danger">Delete</a> 
 								
 			</tr>
-		</tbody>		
+		</tbody>	
+		
 	</table>
-<a th:href="@{/showMyLoginPage}">Logout</a>
+	
+	</div>
+	<br>
+	<br>
+	
+<a th:href="@{/showMyLoginPage}"class="btn btn-success">Logout</a>
 </div>
 	
 </body>

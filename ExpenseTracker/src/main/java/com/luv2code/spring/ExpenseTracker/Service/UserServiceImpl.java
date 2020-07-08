@@ -2,7 +2,9 @@ package com.luv2code.spring.ExpenseTracker.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import javax.management.RuntimeErrorException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,6 +126,18 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<Expense> findByCategoryId(int id) {
 		return expenseRepository.findByCategoryCategoryId(id);
+	}
+	@Override
+	public Expense findByExpenseId(int id) {
+		Expense expense = expenseRepository.findByExpenseId(id);
+		Expense theExpense =null;
+		if(expense!=null) {
+			theExpense=expense;
+		}
+		else {
+			throw new RuntimeException("No Expense found for"+id);
+		}
+		return theExpense;
 	}
 
 }

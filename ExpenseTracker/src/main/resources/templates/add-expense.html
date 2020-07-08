@@ -23,6 +23,9 @@
 	
 		<form action="#" th:action="@{/save}"
 						 th:object="${expense}" method="POST">
+						 
+						 
+		<input type="hidden" th:field="*{expenseId}">
 		
 			<input type="text" th:field="*{amount}"
 					class="form-control mb-4 col-4" placeholder="Amount">

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +23,7 @@ import com.luv2code.spring.ExpenseTracker.Model.Category;
 
 import com.luv2code.spring.ExpenseTracker.Model.Expense;
 import com.luv2code.spring.ExpenseTracker.Model.User;
-
+import com.luv2code.spring.ExpenseTracker.Service.ExpenseService;
 import com.luv2code.spring.ExpenseTracker.Service.UserService;
 
 @Controller
@@ -29,6 +31,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ExpenseService expenseService;
 	
 	public UserController(UserService userService) {
 	  this.userService=userService;
@@ -122,7 +127,27 @@ public String saveEmployee(@ModelAttribute("expense") Expense theExpenses) {
 	public String redirectToLogin() {
 		return "redirect:register";
 	}
-	
-	
+
+	@GetMapping("/showFormForUpdate/{expenseId}")
+	public String showFormForUpdate( @PathVariable("expenseId") int theExpenses,
+									Model theModel) {
+		
+		// get the employee from the service
+		Expense theExpense =expenseService.findById(theExpenses);
+		
+		// set employee as a model attribute to pre-populate the form
+		theModel.addAttribute("expense", theExpense);
+		List<Category> theCategory = userService.findAllCategory();
+		theModel.addAttribute("category", theCategory);
+		// send over to our form
+		return "add-expense";			
+	}
+	@GetMapping("/delete/{expenseId}")
+	public String delete( @PathVariable("expenseId") int theExpenses,
+									Model theModel) {
+		expenseService.deleteById(theExpenses);
+		return "redirect:/expenses";
+	}
+		
 	 
 }
