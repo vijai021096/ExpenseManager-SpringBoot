@@ -33,7 +33,7 @@
 	<br>
 	
 	<!-- Add a button -->
-	<a th:href="@{/showFormForAddIncome}" class="btn btn-primary">Add Income</a>     <a th:href="@{/showFormForAdd}"
+	  <a th:href="@{/showFormForAdd}"
 		class="btn btn-primary ">
 		Add Expense
 	</a>
@@ -52,6 +52,7 @@
 				<th>Expense Added Date</th>
 				<th>Actions</th>
 				
+				
 			</tr>
 		</thead>
 	
@@ -64,15 +65,26 @@
 				<td th:text="${tempExpense.expenseNotes}" />
 				<td th:text="${tempExpense.expenseAddedDate}" />
 				
+				
 			    <td> <a th:href="@{/showFormForUpdate/{expenseId}(expenseId=${tempExpense.expenseId})}" class="btn btn-primary">
                                         Update</a> <a th:href="@{/delete/{expenseId}(expenseId=${tempExpense.expenseId})}"class="btn btn-danger">Delete</a> 
-								
+								<br>
+							
 			</tr>
+			
+			<tr>
+			
+     
+ 
+     <th>Total Expense:</th>   <td th:text="${totalAmount}"/>
+        
+    </tr>
 		</tbody>	
 		
 	</table>
 	
 	</div>
+	
 	<br>
 	<br>
 	

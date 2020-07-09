@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.luv2code.spring.ExpenseTracker.Model.Category;
 
 import com.luv2code.spring.ExpenseTracker.Model.Expense;
+
 import com.luv2code.spring.ExpenseTracker.Model.User;
 import com.luv2code.spring.ExpenseTracker.Service.ExpenseService;
+
 import com.luv2code.spring.ExpenseTracker.Service.UserService;
 
 @Controller
@@ -34,6 +36,8 @@ public class UserController {
 	
 	@Autowired
 	private ExpenseService expenseService;
+	
+
 	
 	public UserController(UserService userService) {
 	  this.userService=userService;
@@ -61,6 +65,11 @@ public class UserController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user= userService.findByUserName(auth.getName()).get(0);
 		List<Expense> expenses = userService.findByUserId(user.getId());
+		int sumAmount=0;
+		for(Expense sum:expenses) {
+			sumAmount+=sum.getAmount();
+		}
+		theModel.addAttribute("totalAmount", sumAmount);
 		theModel.addAttribute("Expenses", expenses);
 		return "list-expenses";
 	}
@@ -148,6 +157,9 @@ public String saveEmployee(@ModelAttribute("expense") Expense theExpenses) {
 		expenseService.deleteById(theExpenses);
 		return "redirect:/expenses";
 	}
+		
+		
+		
 		
 	 
 }
