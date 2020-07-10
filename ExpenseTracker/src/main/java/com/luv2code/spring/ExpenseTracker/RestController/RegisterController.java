@@ -1,6 +1,7 @@
 package com.luv2code.spring.ExpenseTracker.RestController;
 
 import java.security.SecureRandom;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.luv2code.spring.ExpenseTracker.Model.ConfirmationToken;
+import com.luv2code.spring.ExpenseTracker.Model.Roles;
 import com.luv2code.spring.ExpenseTracker.Model.User;
 import com.luv2code.spring.ExpenseTracker.Service.EmailSenderService;
+import com.luv2code.spring.ExpenseTracker.Service.RoleService;
 import com.luv2code.spring.ExpenseTracker.Service.UserService;
 
 
@@ -25,6 +28,10 @@ public class RegisterController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
+	
 	 @Autowired
 	    private EmailSenderService emailSenderService;
 
@@ -58,6 +65,9 @@ public class RegisterController {
 	        {
 	        	String pass=bcryptPasswordEncoder.encode(user.getPassword());
 	        	user.setPassword(pass);
+	        	Collection<Roles>role=null;
+	        	role.add(roleService.findByName("USER"));
+	        	user.setRoles(role);
 	            userService.save(user);
 
 	            ConfirmationToken confirmationToken = new ConfirmationToken(user);
@@ -90,6 +100,9 @@ public class RegisterController {
 	        {
 	            User user = userService.findByEmailIdIgnoreCase(token.getUser().getEmailId()).get(0);
 	            user.setEnabled(true);
+	            Collection<Roles>role=null;
+	        	role.add(roleService.findByName("Confirmed_USER"));
+	        	user.setRoles(role);
 	            userService.save(user);
 	            modelAndView.setViewName("fancy-login");
 	        }

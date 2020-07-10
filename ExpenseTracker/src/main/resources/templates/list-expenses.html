@@ -22,7 +22,8 @@
 <br>
 <br>
 <div class="container">
-	
+	<div class=panel>
+	          <h2 class ="text-primary" th:text="${res}"></h2></div>
 </div>
 
 <div class="container">
@@ -37,6 +38,9 @@
 		class="btn btn-primary ">
 		Add Expense
 	</a>
+	
+	<a th:href="@{showFormForAddIncome}"
+	class="btn btn-primary">Add Income</a>
  <br>
  <br>
 	<br>
@@ -88,7 +92,7 @@
 	<br>
 	<br>
 	
-<a th:href="@{/showMyLoginPage}"class="btn btn-success">Logout</a>
+<a th:href="@{/perform_logout}"class="btn btn-success">Logout</a>
 </div>
 	
 </body>

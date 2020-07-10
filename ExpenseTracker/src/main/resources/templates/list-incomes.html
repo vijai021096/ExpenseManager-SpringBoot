@@ -1,0 +1,96 @@
+ 
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title>Incomes</title>
+</head>
+
+<body>
+<br>
+<br>
+<div class="container">
+	
+</div>
+
+<div class="container">
+
+	<h3>Incomes</h3>
+	<hr>
+	<br>
+	<br>
+	
+	<!-- Add a button -->
+	  <a th:href="@{/showFormForAddIncome}"
+		class="btn btn-primary ">
+		Add Income
+	</a>
+ <br>
+ <br>
+	<br>
+
+	<div class="container-fluid">
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Source of Income</th>
+				<th>Amount</th>
+				
+				<th>Actions</th>
+			</tr>
+		</thead>
+	
+		<tbody>
+			<tr th:each="tempIncome : ${Incomes}">
+			
+			
+				<td th:text="${tempIncome.sourceOfIncome}" />
+					<td th:text="${tempIncome.amount}"/>
+				
+			    <td> <a th:href="@{/showFormForUpdate/{incomeId}(incomeId=${tempIncome.id})}" class="btn btn-primary">
+                                        Update</a> <a th:href="@{/deleteIncome/{incomeId}(incomeId=${tempIncome.id})}"class="btn btn-danger">Delete</a> 
+								<br>
+							
+			</tr>
+			
+			<tr>
+			
+     
+ 
+     <th>Total Income:</th>   <td th:text="${totalAmount}"/>
+        
+    </tr>
+		</tbody>	
+		
+	</table>
+	
+	</div>
+	
+	<br>
+	<br>
+	
+		<hr>
+		<a th:href="@{/expenses}">Back to Expense List</a>
+	<br>
+	<br>
+	
+<a th:href="@{/perform_logout}"class="btn btn-success">Logout</a>
+</div>
+	
+</body>
+</html>
+
+
+
