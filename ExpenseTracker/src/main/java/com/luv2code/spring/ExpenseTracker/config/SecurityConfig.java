@@ -7,7 +7,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.luv2code.spring.ExpenseTracker.Service.UserService;
@@ -28,12 +29,15 @@ import com.luv2code.spring.ExpenseTracker.Service.UserService;
 	}
 	 @Autowired
 	    private UserService userService;
+	 
+
 	
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setUserDetailsService(userService);
 		authProvider.setPasswordEncoder(bCryptPasswordEncoder());
+	
 		
 		return authProvider;
 	}

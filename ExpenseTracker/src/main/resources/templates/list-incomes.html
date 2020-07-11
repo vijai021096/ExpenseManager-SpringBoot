@@ -59,7 +59,7 @@
 				<td th:text="${tempIncome.sourceOfIncome}" />
 					<td th:text="${tempIncome.amount}"/>
 				
-			    <td> <a th:href="@{/showFormForUpdate/{incomeId}(incomeId=${tempIncome.id})}" class="btn btn-primary">
+			    <td> <a th:href="@{/showFormForUpdateIncomes/{incomeId}(incomeId=${tempIncome.id})}" class="btn btn-primary">
                                         Update</a> <a th:href="@{/deleteIncome/{incomeId}(incomeId=${tempIncome.id})}"class="btn btn-danger">Delete</a> 
 								<br>
 							
