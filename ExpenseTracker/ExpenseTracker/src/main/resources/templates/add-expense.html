@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Save Expense</title>
+</head>
+
+<body>
+
+	<div class="container">
+	
+		<h3>Expenses</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Save Expense</p>
+	
+		<form action="#" th:action="@{/save}"
+						 th:object="${expense}" method="POST">
+						 
+						 
+		<input type="hidden" th:field="*{expenseId}">
+		
+			<input type="text" th:field="*{amount}"
+					class="form-control mb-4 col-4" placeholder="Amount">
+
+			<input type="date" th:field="*{expenseDate}"
+					class="form-control mb-4 col-4" placeholder="Date">
+			
+			<select th:field="*{category.categoryId}" class="form-control mb-4 col-4">
+        <option th:each="categoryName : ${category}"
+        th:value="${categoryName.categoryId}" 
+        th:text="${categoryName.categoryName}">
+</select>
+
+			<input type="text" th:field="*{expenseNotes}"
+					class="form-control mb-4 col-4" placeholder="Notes">
+				
+			<button type="submit" class="btn btn-info col-2">Save</button>
+						
+		</form>
+		
+	
+		<hr>
+		<a th:href="@{/expenses}">Back to Expense List</a>
+		
+	</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

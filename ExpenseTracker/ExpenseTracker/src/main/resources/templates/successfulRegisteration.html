@@ -1,0 +1,21 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Registration Success</title>
+    </head>
+    <body>
+        <center>
+            <span th:text="'A verification email has been sent to: ' + ${emailId}"></span>
+        </center>
+        
+         <form method = "GET" th:action="@{/redirectLogin}">
+         <table>
+            <tr>
+               <td>
+                  <input type = "submit" value = "Back to Login"/>
+               </td>
+            </tr>
+         </table>  
+      </form>
+    </body>
+</html>

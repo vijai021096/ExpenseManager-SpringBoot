@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.luv2code.spring.ExpenseTracker.Model.Category;
 import com.luv2code.spring.ExpenseTracker.Model.ConfirmationToken;
@@ -96,13 +97,13 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUserName(username).get(0);
+		List<User> users = userRepository.findByUserName(username);
         
-        if (user == null) {
+        if (CollectionUtils.isEmpty(users)) {
             throw new UsernameNotFoundException("Could not find user");
         }
-         
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), new ArrayList<>());
+        User user = users.get(0);
+        return new org.springframework.security.core.userdetails.User(users.get(0).getUserName(), user.getPassword(),user.isEnabled(),true,true,true, new ArrayList<>());
 
 
 	}

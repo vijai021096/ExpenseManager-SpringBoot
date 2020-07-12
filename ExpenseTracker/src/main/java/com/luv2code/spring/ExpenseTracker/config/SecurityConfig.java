@@ -2,6 +2,7 @@ package com.luv2code.spring.ExpenseTracker.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,12 +34,8 @@ import com.luv2code.spring.ExpenseTracker.Service.UserService;
 
 	
 	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-		authProvider.setUserDetailsService(userService);
-		authProvider.setPasswordEncoder(bCryptPasswordEncoder());
-	
-		
+	public AuthenticationProvider authenticationProvider() {
+		CustomUserDetailAuthenticationProvider authProvider = CustomUserDetailAuthenticationProvider.getInstance(userService, bCryptPasswordEncoder());
 		return authProvider;
 	}
 	
@@ -50,6 +47,7 @@ import com.luv2code.spring.ExpenseTracker.Service.UserService;
             http.authorizeRequests()
             .antMatchers("/register").permitAll()
             .antMatchers("/confirm").permitAll()
+            .antMatchers("/confirm-account").permitAll()
             .anyRequest()
             .authenticated()
             .and()
