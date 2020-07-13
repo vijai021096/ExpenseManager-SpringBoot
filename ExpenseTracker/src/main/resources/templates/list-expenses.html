@@ -63,7 +63,7 @@
 		<tbody>
 			<tr th:each="tempExpense : ${Expenses}">
 			
-				<td th:text="${tempExpense.category.categoryName}" />
+			<td th:text="${tempExpense.category}" /> 
 				<td th:text="${tempExpense.amount}"/>
 				<td th:text="${tempExpense.expenseDate}" />	
 				<td th:text="${tempExpense.expenseNotes}" />

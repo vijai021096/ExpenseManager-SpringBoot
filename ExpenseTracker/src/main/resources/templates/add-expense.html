@@ -33,11 +33,11 @@
 			<input type="date" th:field="*{expenseDate}"
 					class="form-control mb-4 col-4" placeholder="Date">
 			
-			<select th:field="*{category.categoryId}" class="form-control mb-4 col-4">
+		<!--  	<select th:field="*{category.categoryId}" class="form-control mb-4 col-4">
         <option th:each="categoryName : ${category}"
         th:value="${categoryName.categoryId}" 
         th:text="${categoryName.categoryName}">
-</select>
+</select> -->
 
 			<input type="text" th:field="*{expenseNotes}"
 					class="form-control mb-4 col-4" placeholder="Notes">

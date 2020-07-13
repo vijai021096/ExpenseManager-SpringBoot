@@ -1,7 +1,10 @@
 package com.luv2code.spring.ExpenseTracker.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,7 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.luv2code.spring.ExpenseTracker.Model.Category;
+//import com.luv2code.spring.ExpenseTracker.Model.Category;
 import com.luv2code.spring.ExpenseTracker.Model.Expense;
 import com.luv2code.spring.ExpenseTracker.Model.Income;
 import com.luv2code.spring.ExpenseTracker.Model.User;
@@ -64,14 +67,14 @@ public class ExpenseController {
 		return "list-expenses";
 	}
 	
-	//list expense by category
+	/*//list expense by category
 	@GetMapping("/expenseByCatId")
 	public String findExpesnesByUserId(@ModelAttribute("categoryId") int id,Model theModel) {
 		List<Expense> expenses = userService.findByCategoryId(id);
 		theModel.addAttribute("ExpensesByUser", expenses);
 		return "list-expenses-User";
 	}
-	
+	*/
 	//Add expenses
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {
@@ -79,24 +82,74 @@ public class ExpenseController {
 		// create model attribute to bind form data
 		Expense theExpense = new Expense();
 		
-		List<Category> theCategory = userService.findAllCategory();
+		//List<Category> theCategory = userService.findAllCategory();
 
 		
 		theModel.addAttribute("expense", theExpense);
-		theModel.addAttribute("category", theCategory);
+		//theModel.addAttribute("category", theCategory);
 		
 		return "add-expense";
 	}
 	
 	//save expense
 	@PostMapping("/save")
-	public String saveEmployee(@ModelAttribute("expense") Expense theExpenses) {
+	public String saveExpense(@ModelAttribute("expense") Expense theExpenses) {
 		
-		// save the employee
+		int flag=0;
+		List<String> lunch = new ArrayList<String>();
+		lunch.add("lunch");
+		lunch.add("food");
+		lunch.add("breakfast");
+		lunch.add("dinner");
+		
+		List<String> entertainment = new ArrayList<>();
+		entertainment.add("Movie");
+		entertainment.add("game");
+		entertainment.add("cricket");
+		entertainment.add("indoor");
+		entertainment.add("football");
+		entertainment.add("sports");
+		
+		List<String>emi = new ArrayList<String>();
+		emi.add("emi");
+		emi.add("loan");
+		
+		
+		// save the User
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user= userService.findByUserName(auth.getName()).get(0);
 		theExpenses.setUser(user);
 		theExpenses.setExpenseAddedDate(new java.sql.Date(new Date().getTime()));
+		String notes=theExpenses.getExpenseNotes();
+		//Category category=new Category();
+		String[] listNotes = notes.split(" ");
+		for(int i=0;i<listNotes.length;i++) {
+			if(lunch.contains(listNotes[i])) {
+				flag=1;
+				break;
+			}
+			else if(entertainment.contains(listNotes[i])) {
+				flag=2;
+				break;
+			}
+			else if(emi.contains(listNotes[i])) {
+				flag=3;
+				break;
+			}
+		}
+		if(flag==1) {
+			theExpenses.setCategory("FOOD");
+		}
+		else if(flag==2) {
+			theExpenses.setCategory("ENTERTAINMENT");
+		}
+		else if(flag==3) {
+			theExpenses.setCategory("EMI");
+		}
+		else {
+			theExpenses.setCategory("others");
+		}
+		//theExpenses.setCategory(category);
 		userService.saveExpense(theExpenses);
 		
 		// use a redirect to prevent duplicate submissions
@@ -113,8 +166,8 @@ public class ExpenseController {
 		
 		// set employee as a model attribute to pre-populate the form
 		theModel.addAttribute("expense", theExpense);
-		List<Category> theCategory = userService.findAllCategory();
-		theModel.addAttribute("category", theCategory);
+		//List<Category> theCategory = userService.findAllCategory();
+		//theModel.addAttribute("category", theCategory);
 		// send over to our form
 		return "add-expense";			
 	}

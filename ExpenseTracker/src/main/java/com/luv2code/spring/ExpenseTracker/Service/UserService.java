@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.luv2code.spring.ExpenseTracker.Model.Category;
+//import com.luv2code.spring.ExpenseTracker.Model.Category;
 import com.luv2code.spring.ExpenseTracker.Model.ConfirmationToken;
 import com.luv2code.spring.ExpenseTracker.Model.Expense;
 import com.luv2code.spring.ExpenseTracker.Model.User;
@@ -15,13 +15,13 @@ public interface UserService extends UserDetailsService {
 	
 	public User findById(int id);
 	
-	public List<Category>findAllCategory();
+	//public List<Category>findAllCategory();
 
 	public List<Expense>findAllExpense();
 	
 	public List<Expense>findByUserId(int id);
 	
-	public List<Expense>findByCategoryId(int id);
+	//public List<Expense>findByCategoryId(int id);
 	
 	public Expense findByExpenseId(int id);
 	

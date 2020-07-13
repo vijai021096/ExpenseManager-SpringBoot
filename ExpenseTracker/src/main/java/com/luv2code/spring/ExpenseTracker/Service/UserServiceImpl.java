@@ -13,11 +13,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.luv2code.spring.ExpenseTracker.Model.Category;
+//import com.luv2code.spring.ExpenseTracker.Model.Category;
 import com.luv2code.spring.ExpenseTracker.Model.ConfirmationToken;
 import com.luv2code.spring.ExpenseTracker.Model.Expense;
 import com.luv2code.spring.ExpenseTracker.Model.User;
-import com.luv2code.spring.ExpenseTracker.Repository.CategoryRepository;
+//import com.luv2code.spring.ExpenseTracker.Repository.CategoryRepository;
 import com.luv2code.spring.ExpenseTracker.Repository.ConfirmationTokenRepository;
 import com.luv2code.spring.ExpenseTracker.Repository.ExpenseRepository;
 import com.luv2code.spring.ExpenseTracker.Repository.UserRepository;
@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	private CategoryRepository categoryRepository;
+	/*@Autowired
+	private CategoryRepository categoryRepository;*/
 	
 	@Autowired
 	private ExpenseRepository expenseRepository;
@@ -48,12 +48,12 @@ public class UserServiceImpl implements UserService{
 		return userRepository.findAll();
 		
 	}
-	@Override
+	/*@Override
 	@Transactional
 	public List<Category> findAllCategory() {
 		
 		return categoryRepository.findAll();
-	}
+	}*/
 	@Override
 	@Transactional
 	public List<Expense> findAllExpense() {
@@ -124,10 +124,10 @@ public class UserServiceImpl implements UserService{
 	   expenseRepository.save(expense);
 		
 	}
-	@Override
+	/*@Override
 	public List<Expense> findByCategoryId(int id) {
 		return expenseRepository.findByCategoryCategoryId(id);
-	}
+	}*/
 	@Override
 	public Expense findByExpenseId(int id) {
 		Expense expense = expenseRepository.findByExpenseId(id);

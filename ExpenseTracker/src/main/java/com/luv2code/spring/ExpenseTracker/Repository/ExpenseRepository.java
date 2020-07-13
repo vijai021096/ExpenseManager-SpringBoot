@@ -13,7 +13,7 @@ import com.luv2code.spring.ExpenseTracker.Model.Expense;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
 
-	List<Expense> findByCategoryCategoryId(int id);
+	//List<Expense> findByCategoryCategoryId(int id);
 	
 	List<Expense>findByUserId(int id);
 	

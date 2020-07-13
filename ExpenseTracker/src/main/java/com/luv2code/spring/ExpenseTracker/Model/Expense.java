@@ -41,15 +41,18 @@ public class Expense {
 	
 	@Column(name="expense_notes")
 	private String expenseNotes;
+	
+	@Column(name="category")
+	private String category;
 
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
 	private User user;
 
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="expense_categroy_id")
-	private Category category;
+	private Category category;*/
 	
 
 
@@ -62,7 +65,7 @@ public class Expense {
 
 
 	public Expense(int expenseId, int amount, Date expenseDate, Date expenseAddedDate, String expenseNotes, User user,
-			Category category) {
+			String category) {
 		super();
 		this.expenseId = expenseId;
 		this.amount = amount;
@@ -74,11 +77,11 @@ public class Expense {
 	}
 
 	
-	public Category getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 

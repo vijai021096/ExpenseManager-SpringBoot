@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.luv2code.spring.ExpenseTracker.Model.Category;
+//import com.luv2code.spring.ExpenseTracker.Model.Category;
 
 import com.luv2code.spring.ExpenseTracker.Model.Expense;
 
@@ -54,14 +54,14 @@ public class UserController {
 	
 	
 	//Get Categories
-	@GetMapping("/category")
+	/*@GetMapping("/category")
 	public String findAllCategories(Model theModel) {
 		
 		List<Category> categories = userService.findAllCategory();
 		theModel.addAttribute("categoriesList", categories);
 		
 		return "list-categories";
-	}
+	}*/
 	
 	
 	/*@GetMapping("/expenseById")
