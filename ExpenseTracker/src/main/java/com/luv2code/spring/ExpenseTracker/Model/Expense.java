@@ -50,12 +50,13 @@ public class Expense {
 	private User user;
 
 
+	@OneToOne(mappedBy = "expenses" ,cascade = CascadeType.PERSIST)
+	private ImageModel image;
+	
 	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="expense_categroy_id")
 	private Category category;*/
 	
-
-
 
 	
 	
@@ -63,28 +64,18 @@ public class Expense {
 		super();
 	}
 
-
-	public Expense(int expenseId, int amount, Date expenseDate, Date expenseAddedDate, String expenseNotes, User user,
-			String category) {
+	public Expense(int expenseId, int amount, Date expenseDate, Date expenseAddedDate, String expenseNotes,
+			String category, User user, ImageModel image) {
 		super();
 		this.expenseId = expenseId;
 		this.amount = amount;
 		this.expenseDate = expenseDate;
-		this.expenseAddedDate =expenseAddedDate;
+		this.expenseAddedDate = expenseAddedDate;
 		this.expenseNotes = expenseNotes;
+		this.category = category;
 		this.user = user;
-		this.category = category;
+		this.image = image;
 	}
-
-	
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 
 	public int getExpenseId() {
 		return expenseId;
@@ -93,8 +84,6 @@ public class Expense {
 	public void setExpenseId(int expenseId) {
 		this.expenseId = expenseId;
 	}
-
-	
 
 	public int getAmount() {
 		return amount;
@@ -117,7 +106,7 @@ public class Expense {
 	}
 
 	public void setExpenseAddedDate(Date expenseAddedDate) {
-		this.expenseAddedDate =  expenseAddedDate;
+		this.expenseAddedDate = expenseAddedDate;
 	}
 
 	public String getExpenseNotes() {
@@ -128,7 +117,14 @@ public class Expense {
 		this.expenseNotes = expenseNotes;
 	}
 
-    
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -137,12 +133,23 @@ public class Expense {
 		this.user = user;
 	}
 
-	
+	public ImageModel getImage() {
+		return image;
+	}
+
+	public void setImage(ImageModel image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
-		return "Expense [expenseId=" + expenseId + ", amount=" + amount + ", expenseDate=" + expenseDate + ", expenseAddedDate="
-				+ expenseAddedDate + ", expenseNotes=" + expenseNotes + "]";
+		return "Expense [expenseId=" + expenseId + ", amount=" + amount + ", expenseDate=" + expenseDate
+				+ ", expenseAddedDate=" + expenseAddedDate + ", expenseNotes=" + expenseNotes + ", category=" + category
+				+ ", user=" + user + ", image=" + image + "]";
 	}
+
+
+	
 	
 	
 	

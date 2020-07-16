@@ -63,7 +63,7 @@ import com.luv2code.spring.ExpenseTracker.Service.UserService;
     			.deleteCookies("JSESSIONID")
     			.and()
     			.exceptionHandling().accessDeniedPage("/access-denied");
-            
+            http.csrf().disable();
             
             
 		

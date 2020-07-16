@@ -55,7 +55,8 @@
 				<th>Notes</th>
 				<th>Expense Added Date</th>
 				<th>Actions</th>
-				
+				<th>Add Bills</th>
+				<th>View Bill</th>
 				
 			</tr>
 		</thead>
@@ -73,8 +74,11 @@
 			    <td> <a th:href="@{/showFormForUpdate/{expenseId}(expenseId=${tempExpense.expenseId})}" class="btn btn-primary">
                                         Update</a> <a th:href="@{/delete/{expenseId}(expenseId=${tempExpense.expenseId})}"class="btn btn-danger">Delete</a> 
 								<br>
-							
+					<td><a th:href="@{/getDetail/{expenseId}(expenseId=${tempExpense.expenseId})}" class="btn btn-primary">Upload Bill</a>		
+					
+					<td><a th:href="@{/files/{expenseid}(expenseid=${tempExpense.expenseId})}" class="btn btn-success" >Files</a>
 			</tr>
+			
 			
 			<tr>
 			

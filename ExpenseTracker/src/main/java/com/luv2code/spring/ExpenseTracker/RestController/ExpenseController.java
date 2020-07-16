@@ -103,7 +103,7 @@ public class ExpenseController {
 		lunch.add("dinner");
 		
 		List<String> entertainment = new ArrayList<>();
-		entertainment.add("Movie");
+		entertainment.add("movie");
 		entertainment.add("game");
 		entertainment.add("cricket");
 		entertainment.add("indoor");
@@ -124,15 +124,15 @@ public class ExpenseController {
 		//Category category=new Category();
 		String[] listNotes = notes.split(" ");
 		for(int i=0;i<listNotes.length;i++) {
-			if(lunch.contains(listNotes[i])) {
+			if(lunch.contains(listNotes[i].toLowerCase())) {
 				flag=1;
 				break;
 			}
-			else if(entertainment.contains(listNotes[i])) {
+			else if(entertainment.contains(listNotes[i].toLowerCase())) {
 				flag=2;
 				break;
 			}
-			else if(emi.contains(listNotes[i])) {
+			else if(emi.contains(listNotes[i].toLowerCase())) {
 				flag=3;
 				break;
 			}
