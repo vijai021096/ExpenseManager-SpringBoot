@@ -1,5 +1,6 @@
 package com.luv2code.spring.ExpenseTracker.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,8 @@ public class ExpenseService {
 			throw new RuntimeException("No Expense Found For"+id);
 		}
 		
+	}
+	public List<Expense> findByUserId(int id) {
+		return expenseRepository.findByUserId(id);
 	}
 }

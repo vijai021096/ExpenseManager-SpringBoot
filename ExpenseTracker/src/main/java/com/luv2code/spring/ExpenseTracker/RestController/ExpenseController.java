@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 //import com.luv2code.spring.ExpenseTracker.Model.Category;
 import com.luv2code.spring.ExpenseTracker.Model.Expense;
@@ -67,14 +68,22 @@ public class ExpenseController {
 		return "list-expenses";
 	}
 	
-	/*//list expense by category
-	@GetMapping("/expenseByCatId")
-	public String findExpesnesByUserId(@ModelAttribute("categoryId") int id,Model theModel) {
-		List<Expense> expenses = userService.findByCategoryId(id);
+	/*//list expense by users
+	@GetMapping("/expenseByUserId/{id}")
+	public String findExpesnesByUserId(@PathVariable("userid") int userid,Model theModel) {
+		List<Expense> expenses = userService.findByUserId(userid);
+		theModel.addAttribute("ExpensesByUser", expenses);
+		return "list-expenses-User";
+	}*/
+	@GetMapping("/expenseById/{expenseId}")
+	public String findExpesnesByUserId(Model theModel,@PathVariable("expenseId") int id) {
+		Expense expense = expenseService.findById(id);
+		User user=expense.getUser();
+		int theId = user.getId();
+		List<Expense> expenses = userService.findByUserId(theId);
 		theModel.addAttribute("ExpensesByUser", expenses);
 		return "list-expenses-User";
 	}
-	*/
 	//Add expenses
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {

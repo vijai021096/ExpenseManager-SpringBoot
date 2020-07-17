@@ -50,8 +50,7 @@ public class Expense {
 	private User user;
 
 
-	@OneToOne(mappedBy = "expenses" ,cascade = CascadeType.PERSIST)
-	private ImageModel image;
+
 	
 	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="expense_categroy_id")
@@ -65,7 +64,7 @@ public class Expense {
 	}
 
 	public Expense(int expenseId, int amount, Date expenseDate, Date expenseAddedDate, String expenseNotes,
-			String category, User user, ImageModel image) {
+			String category, User user) {
 		super();
 		this.expenseId = expenseId;
 		this.amount = amount;
@@ -74,7 +73,7 @@ public class Expense {
 		this.expenseNotes = expenseNotes;
 		this.category = category;
 		this.user = user;
-		this.image = image;
+		
 	}
 
 	public int getExpenseId() {
@@ -133,19 +132,13 @@ public class Expense {
 		this.user = user;
 	}
 
-	public ImageModel getImage() {
-		return image;
-	}
-
-	public void setImage(ImageModel image) {
-		this.image = image;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "Expense [expenseId=" + expenseId + ", amount=" + amount + ", expenseDate=" + expenseDate
 				+ ", expenseAddedDate=" + expenseAddedDate + ", expenseNotes=" + expenseNotes + ", category=" + category
-				+ ", user=" + user + ", image=" + image + "]";
+				+ ", user=" + user + "]";
 	}
 
 
