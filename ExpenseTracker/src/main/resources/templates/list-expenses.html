@@ -21,6 +21,9 @@
 <body>
 <br>
 <br>
+<a th:href="@{/perform_logout}"class="btn btn-success btn-lg float-right">Logout</a>
+<br>
+<br>
 <div class="container">
 	<div class=panel>
 	          <h2 class ="text-primary" th:text="${res}"></h2></div>
@@ -87,13 +90,13 @@
 		</tbody>	
 		
 	</table>
-	 <a th:href="@{/pdfReport}" class="btn btn-primary">Generate Expense PDF</a>
+	 <a th:href="@{/pdfReport}" class="btn btn-primary">Generate Expense PDF</a> <a th:href="@{/showCharts}" class="btn btn-success">Generate Chart</a>
 	</div>
 	
 	<br>
 	<br>
 	
-<a th:href="@{/perform_logout}"class="btn btn-success">Logout</a>
+
 </div>
 	
 </body>

@@ -41,7 +41,7 @@ public class ReportGenerator {
 		ByteArrayInputStream bis = GeneratePdfReport.expenseReport(expenseList);
 		
 		HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=Expensereport.pdf");
+        headers.add("Content-Disposition", "attachment; filename=Expensereport.pdf");
 
         return ResponseEntity
                 .ok()

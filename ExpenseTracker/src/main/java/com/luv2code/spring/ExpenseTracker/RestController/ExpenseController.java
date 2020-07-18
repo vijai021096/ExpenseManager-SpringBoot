@@ -119,6 +119,13 @@ public class ExpenseController {
 		entertainment.add("football");
 		entertainment.add("sports");
 		
+		List<String>utilities =new ArrayList<>();
+		utilities.add("bill");
+		utilities.add("electricity");
+		utilities.add("petrol");
+		utilities.add("bike");
+		utilities.add("car");
+		
 		List<String>emi = new ArrayList<String>();
 		emi.add("emi");
 		emi.add("loan");
@@ -145,6 +152,10 @@ public class ExpenseController {
 				flag=3;
 				break;
 			}
+			else if(utilities.contains(listNotes[i].toLowerCase())){
+				flag=4;
+				break;
+			}
 		}
 		if(flag==1) {
 			theExpenses.setCategory("FOOD");
@@ -154,6 +165,9 @@ public class ExpenseController {
 		}
 		else if(flag==3) {
 			theExpenses.setCategory("EMI");
+		}
+		else if(flag==4) {
+			theExpenses.setCategory("UTILITIES");
 		}
 		else {
 			theExpenses.setCategory("others");
