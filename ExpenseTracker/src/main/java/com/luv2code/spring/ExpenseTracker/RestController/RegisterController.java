@@ -4,11 +4,15 @@ import java.security.SecureRandom;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,14 +56,24 @@ public class RegisterController {
 	    }
 
 	    @RequestMapping(value="/register", method = RequestMethod.POST)
-	    public ModelAndView registerUser(ModelAndView modelAndView, User user)
+	    public ModelAndView registerUser(ModelAndView modelAndView,@Valid  User user,BindingResult bindingResult)
 	    {
-
+          if(bindingResult.hasErrors()) {
+        	  modelAndView.setViewName("register");
+        	 
+          }
+          else {
 	        List<User> existingUser = userService.findByEmailIdIgnoreCase(user.getEmailId());
+	        List<User>existingUsers = userService.findByUserName(user.getUserName());
 	        if(existingUser.size()>0)
 	        {
 	            modelAndView.addObject("message","This email already exists!");
 	            modelAndView.setViewName("error");
+	        }
+	        
+	        else if(existingUsers.size()>0) {
+	        	modelAndView.addObject("message", "User Name already Exists!");
+	        	modelAndView.setViewName("error");
 	        }
 	        else
 	        {
@@ -87,6 +101,7 @@ public class RegisterController {
 
 	            modelAndView.setViewName("successfulRegisteration");
 	        }
+          }
 
 	        return modelAndView;
 	    }
