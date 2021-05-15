@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  mysql-service:
+    image: mysql:5.7
+    networks:
+      - spring-boot-mysql-network
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=testapp
+  web-service:
+    build:
+      context: ./
+      
+    ports:
+      - "4000:4000"
+    networks:
+      - spring-boot-mysql-network
+    depends_on:
+      - mysql-service
+networks:
+  spring-boot-mysql-network:
+    driver: bridge

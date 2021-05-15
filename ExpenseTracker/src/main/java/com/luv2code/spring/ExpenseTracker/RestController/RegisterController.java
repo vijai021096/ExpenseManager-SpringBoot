@@ -1,29 +1,23 @@
 package com.luv2code.spring.ExpenseTracker.RestController;
 
-import java.security.SecureRandom;
-import java.util.Collection;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.luv2code.spring.ExpenseTracker.Model.ConfirmationToken;
-
 import com.luv2code.spring.ExpenseTracker.Model.User;
 import com.luv2code.spring.ExpenseTracker.Service.EmailSenderService;
-
 import com.luv2code.spring.ExpenseTracker.Service.UserService;
 
 
@@ -36,6 +30,9 @@ public class RegisterController {
 //	@Autowired
 //	private RoleService roleService;
 	
+	@Value("${server.port}")
+        private int serverPort;
+
 	 @Autowired
 	    private EmailSenderService emailSenderService;
 
@@ -91,9 +88,9 @@ public class RegisterController {
 	            SimpleMailMessage mailMessage = new SimpleMailMessage();
 	            mailMessage.setTo(user.getEmailId());
 	            mailMessage.setSubject("Complete Registration!");
-	            mailMessage.setFrom("vijai021096@gmail.com");
+	            mailMessage.setFrom("noreplyInterviewTracker@gmail.com");
 	            mailMessage.setText("To confirm your account, please click here : "
-	            +"http://localhost:8082/confirm-account?token="+confirmationToken.getConfirmationToken());
+	            +"http://localhost:"+serverPort+"/confirm-account?token="+confirmationToken.getConfirmationToken());
 
 	            emailSenderService.sendEmail(mailMessage);
 
