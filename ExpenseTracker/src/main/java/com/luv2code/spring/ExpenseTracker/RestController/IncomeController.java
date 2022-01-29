@@ -55,7 +55,7 @@ public class IncomeController {
 			return "add-income";
 		}
 		
-		//save expense
+		//save income
 		@PostMapping("/saveIncome")
 		public String saveIncome(@ModelAttribute("income") Income theIncome) {
 			

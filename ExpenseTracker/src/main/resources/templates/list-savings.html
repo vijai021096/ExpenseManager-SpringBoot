@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title>Expenses</title>
+</head>
+
+<body>
+	<br>
+	<br>
+	<a th:href="@{/perform_logout}" class="btn btn-success btn-lg float-right">Logout</a>
+	<br>
+	<br>
+	<div class="container">
+		<div class=panel>
+			<h2 class="text-primary" th:text="${res}"></h2>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<h3>Savings</h3>
+		<hr>
+		<br>
+		<br>
+
+
+		<br>
+
+
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Savings Type</th>
+					<th>Amount</th>
+
+
+
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="tempSavings : ${savings}">
+
+					<td th:text="${tempSavings.savingsType}" />
+					<td th:text="${tempSavings.amount}" />
+
+
+
+
+				</tr>
+
+
+				<tr>
+
+
+
+					<th>Total Savings:</th>
+					<td th:text="${totalAmount}" />
+
+				</tr>
+			</tbody>
+
+		</table>
+		<a th:href="@{/expenses}">Back to Expense List</a>
+	</div>
+
+	<br>
+	<br>
+
+
+	</div>
+
+</body>
+
+</html>

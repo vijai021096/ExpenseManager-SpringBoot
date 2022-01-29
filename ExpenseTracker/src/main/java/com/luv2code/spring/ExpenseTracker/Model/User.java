@@ -1,7 +1,5 @@
 package com.luv2code.spring.ExpenseTracker.Model;
 
-
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 
 import javax.persistence.OneToMany;
 
@@ -29,7 +26,7 @@ public class User {
 	private int id;
 
 	@NotNull(message = "User Name is Required")
-	@Size(min = 1,message = "User Name is Required")
+	@Size(min = 1, message = "User Name is Required")
 	@Column(name = "name")
 	private String userName;
 
@@ -50,14 +47,14 @@ public class User {
 
 	private List<Income> incomeList;
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
 
+	private List<Savings> SavingsList;
 
-	public User() {
-
-	}
-
-	public User(int id, String userName, String emailId, String password, boolean isEnabled, List<Expense> expenseList,
-			List<Income> incomeList) {
+	public User(int id,
+			@NotNull(message = "User Name is Required") @Size(min = 1, message = "User Name is Required") String userName,
+			String emailId, String password, boolean isEnabled, List<Expense> expenseList, List<Income> incomeList,
+			List<Savings> savingsList) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -66,7 +63,19 @@ public class User {
 		this.isEnabled = isEnabled;
 		this.expenseList = expenseList;
 		this.incomeList = incomeList;
-	
+		SavingsList = savingsList;
+	}
+
+	public List<Savings> getSavingsList() {
+		return SavingsList;
+	}
+
+	public void setSavingsList(List<Savings> savingsList) {
+		SavingsList = savingsList;
+	}
+
+	public User() {
+
 	}
 
 	public int getId() {
@@ -125,13 +134,11 @@ public class User {
 		this.incomeList = incomeList;
 	}
 
-
-	
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", emailId=" + emailId + ", password=" + password
-				+ ", isEnabled=" + isEnabled + "]";
+				+ ", isEnabled=" + isEnabled + ", expenseList=" + expenseList + ", incomeList=" + incomeList
+				+ ", SavingsList=" + SavingsList + "]";
 	}
 
 }

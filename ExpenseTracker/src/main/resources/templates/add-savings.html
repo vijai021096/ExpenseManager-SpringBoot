@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Save Savings</title>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<h3>Savings</h3>
+		<hr>
+
+		<p class="h4 mb-4">Save Savings</p>
+
+		<form action="#" th:action="@{/saveSavings}" th:object="${savings}" method="POST">
+
+
+			<input type="hidden" th:field="*{id}">
+
+			<input type="text" th:field="*{amount}" class="form-control mb-4 col-4" placeholder="Amount">
+
+
+
+			<select name="savingsType" th:field="*{savingsType}">
+				<option th:each="savingsType : ${T(com.luv2code.spring.ExpenseTracker.Model.SavingsType).values()}"
+					th:value="${savingsType}" th:text="${savingsType.type}"></option>
+			</select>
+			<button type="submit" class="btn btn-info col-2">Save</button>
+
+		</form>
+
+
+		<hr>
+		<a th:href="@{/savings}">Back to Savings List</a>
+
+	</div>
+</body>
+
+</html>
