@@ -1,106 +1,112 @@
- 
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    
+
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
- <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<title>Expenses</title>
 </head>
 
 <body>
-<br>
-<br>
-<a th:href="@{/perform_logout}"class="btn btn-success btn-lg float-right">Logout</a>
-<br>
-<br>
-<div class="container">
-	<div class=panel>
-	          <h2 class ="text-primary" th:text="${res}"></h2></div>
-</div>
-
-<div class="container">
-
-	<h3>Expenses</h3>
-	<hr>
 	<br>
 	<br>
-	
-	<!-- Add a button -->
-	  <a th:href="@{/showFormForAdd}"
-		class="btn btn-primary ">
-		Add Expense
-	</a>
-	
-	<a th:href="@{showFormForAddIncome}"
-	class="btn btn-primary">Add Income</a>
- <br>
- <br>
+	<a th:href="@{/perform_logout}" class="btn btn-success btn-lg float-right">Logout</a>
 	<br>
-
-	<div class="container-fluid">
-	<table class="table table-bordered table-striped">
-		<thead class="thead-dark">
-			<tr>
-				<th>Category</th>
-				<th>Amount</th>
-				<th>Expense Date</th>
-				<th>Notes</th>
-				<th>Expense Added Date</th>
-				<th>Actions</th>
-			
-				
-			</tr>
-		</thead>
-	
-		<tbody>
-			<tr th:each="tempExpense : ${Expenses}">
-			
-			<td th:text="${tempExpense.category}" /> 
-				<td th:text="${tempExpense.amount}"/>
-				<td th:text="${tempExpense.expenseDate}" />	
-				<td th:text="${tempExpense.expenseNotes}" />
-				<td th:text="${tempExpense.expenseAddedDate}" />
-				
-				
-			    <td> <a th:href="@{/showFormForUpdate/{expenseId}(expenseId=${tempExpense.expenseId})}" class="btn btn-primary">
-                                        Update</a> <a th:href="@{/delete/{expenseId}(expenseId=${tempExpense.expenseId})}"class="btn btn-danger">Delete</a> 
-							
-					
-			</tr>
-			
-			
-			<tr>
-			
-     
- 
-     <th>Total Expense:</th>   <td th:text="${totalAmount}"/>
-        
-    </tr>
-		</tbody>	
-		
-	</table>
-	 <a th:href="@{/pdfReport}" class="btn btn-primary">Generate Expense PDF</a> <a th:href="@{/showCharts}" class="btn btn-success">Generate Chart</a>
+	<br>
+	<div class="container">
+		<div class=panel>
+			<h2 class="text-primary" th:text="${res}"></h2>
+		</div>
 	</div>
-	
-	<br>
-	<br>
-	
 
-</div>
-	
+	<div class="container">
+
+		<h3>Expenses</h3>
+		<hr>
+		<br>
+		<br>
+
+		<!-- Add a button -->
+		<a th:href="@{/showFormForAdd}" class="btn btn-primary ">
+			Add Expense
+		</a>
+
+		<a th:href="@{showFormForAddIncome}" class="btn btn-primary">Add Income</a>
+
+		<a th:href="@{showFormForAddSavings}" class="btn btn-primary">Add Savings</a>
+		<br>
+		<br>
+		<br>
+
+		<div class="container-fluid">
+			<table class="table table-bordered table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>Category</th>
+						<th>Amount</th>
+						<th>Expense Date</th>
+						<th>Notes</th>
+						<th>Expense Added Date</th>
+						<th>Actions</th>
+
+
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="tempExpense : ${Expenses}">
+
+						<td th:text="${tempExpense.category}" />
+						<td th:text="${tempExpense.amount}" />
+						<td th:text="${tempExpense.expenseDate}" />
+						<td th:text="${tempExpense.expenseNotes}" />
+						<td th:text="${tempExpense.expenseAddedDate}" />
+
+
+						<td> <a th:href="@{/showFormForUpdate/{expenseId}(expenseId=${tempExpense.expenseId})}"
+								class="btn btn-primary">
+								Update</a> <a th:href="@{/delete/{expenseId}(expenseId=${tempExpense.expenseId})}"
+								class="btn btn-danger">Delete</a>
+
+
+					</tr>
+
+
+					<tr>
+
+
+
+						<th>Total Expense:</th>
+						<td th:text="${totalAmount}" />
+
+					</tr>
+				</tbody>
+
+			</table>
+
+
+
+			<a th:href="@{/pdfReport}" class="btn btn-primary">Generate Expense PDF</a> <a th:href="@{/showCharts}"
+				class="btn btn-success">Generate Chart</a>
+		</div>
+
+		<br>
+		<br>
+
+
+	</div>
+
 </body>
+
 </html>
-
-
-
